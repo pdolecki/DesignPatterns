@@ -5,7 +5,7 @@ class Ticket {
 }
 // Tworzymy klasę TicketFactory, do tworzenia obiektów Ticket
 class TicketFactory {
-  private tickets: Ticket[];
+  private tickets: Ticket[] = [];
 
   getTicket(charge: string) {
     return this.tickets.find((ticket) => ticket.charge === charge);

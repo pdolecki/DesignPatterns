@@ -1,33 +1,32 @@
-// Chcemy uzyskać naładowaną baterię
-class Battery {
-  public makeBattery() {
-    console.log("Making a battery...");
-  }
+// Chcemy obsłużyć elektrownię jądrową, zbudowaną z wielu systemów
+// Budujemy system odpowiedzialny za chłodzenie
+class CoolingSystem {
+  setMaxTemperature(degrees: number) {}
+  turnOn() {}
+  turnOff() {}
 }
-// Tworzymy klasę(fasadę), która spełni nasze wymagania
-// i wyabstrahuje proces z perspektywy "użytkownika"
+// Budujemy system odpowiedzialny za reaktor
+class NuclearReactor {
+  turnOn() {}
+  turnOff() {}
+}
+// Budujemy fasadę, która łączy nasze podsystemy w uproszczony interfejs
 class PowerPlantFacade {
-  constructor(private battery: Battery) {}
+  private cooling = new CoolingSystem();
+  private reactor = new NuclearReactor();
 
-  public makeBattery() {
-    this.battery.makeBattery();
-    this.gatherEnergy();
-    this.createBattery();
-    this.loadBattery();
+  public turnOnSystems() {
+    this.cooling.turnOn();
+    this.cooling.setMaxTemperature(100);
+    this.reactor.turnOn();
   }
 
-  private gatherEnergy() {
-    console.log("Gathering energy...");
-  }
-
-  private createBattery() {
-    console.log("Creating battery...");
-  }
-
-  private loadBattery() {
-    console.log("Loading battery...");
+  public turnOffSystems() {
+    this.reactor.turnOff();
+    this.cooling.turnOff();
   }
 }
-// I wreszcie tworzymy naszą baterię
-const battery = new PowerPlantFacade(new Battery());
-battery.makeBattery();
+// Za pomocą klasy/fasady obsługujemy elektrownię
+const powerPlant = new PowerPlantFacade();
+powerPlant.turnOnSystems();
+powerPlant.turnOffSystems();

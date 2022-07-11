@@ -1,29 +1,38 @@
-// Wyobraźmy sobie że chcemy poruszać się samochodem po szynach
-class Car {
-  constructor(private type: string) {}
-
-  public getType() {
-    return this.type;
+// Chcemy poruszać się samochodem po torach
+class TrainWheels {
+  rideOnTrainWheels() {
+    return "TrainWheels ride on rails...";
   }
 }
-// Tworzymy klasę tory(Rails)
-class Rails {
-  constructor(private type: string) {}
 
-  public getType() {
-    return this.type;
+class CarWheels {
+  rideOnCarWheels() {
+    return "CarWheels ride on road...";
   }
 }
-// Następpnie tworzymy adapter, który
-// zamieni nam typ napędu na szynowy
-class CarAdapter extends Rails {
-  constructor(private car: Car) {
-    super(car.getType());
+// Potrzebujemy do tego adaptera(z kół przystosowanych do poruszania
+// się po drodze, na takie do przemieszczania się po torach)
+class CarWheelsToTrainWheelsAdapter extends TrainWheels {
+  private carWheels: CarWheels;
+
+  constructor(carWheels: CarWheels) {
+    super();
+    this.carWheels = carWheels;
   }
 
-  public getType() {
-    return this.car.getType();
+  rideOnRails() {
+    return `Now car can ride on rails...`;
   }
 }
-// Teraz tworzymy nasz samochód do jazdy po torach
-const car = new CarAdapter(new Car("Wheels"));
+
+function rideOnRails(drive: TrainWheels) {
+  console.log(drive.rideOnTrainWheels());
+}
+// Koła pociągowe mogą jechać po torach
+const trainWheels = new TrainWheels();
+rideOnRails(trainWheels);
+// Koła samochodu nie mogą jechać po torach
+const carWheels = new CarWheels();
+// Wykorszystujemy adapter, by poruszać się samochodem po torach
+const adapter = new CarWheelsToTrainWheelsAdapter(carWheels);
+rideOnRails(adapter);
