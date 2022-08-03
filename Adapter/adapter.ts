@@ -21,7 +21,7 @@ class CarWheelsToTrainWheelsAdapter extends TrainWheels {
   }
 
   rideOnRails() {
-    return `Now car can ride on rails...`;
+    return "Now car can ride on rails...";
   }
 }
 

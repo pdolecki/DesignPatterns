@@ -1,14 +1,22 @@
-// Wyboraźmy sobie, że chcemy stworzyć sobie swojego robota w oparciu
-// o istniejący(ogólny) prototyp:
+// Wyobraźmy sobie, że chcemy stworzyć swojego robota w
+// oparciu o istniejący(ogólny) prototyp:
 const robot = {
-  // ogólny prototyp
+  // OGÓŁNY PROTOTYP
   numberOfLimbs: 4,
-  start() {},
-  stop() {},
+  owner: "RobotFactory",
+
+  clone: (newOwner) => Object.create(robot, { owner: { value: newOwner } }),
 };
-// Wykorzystujemy JS'ową metodę, dodatkowo definiujemy właściciela
-// naszego robota:
-// Object.create(proto[, propertiesObject])
-const myRobot = Object.create(robot, { owner: { value: "Patrick" } });
-// Sprawdzamy, czy prototyp naszego robota jest ogólnym prototypem
-console.log(myRobot.__proto__ === robot); // true
+// Wykorzystujemy metodę do klonowania,
+// dodatkowo podając nowego właściciela
+const bobsRobot = robot.clone("Bob");
+const dinsRobot = robot.clone("Din");
+// Sprwdzamy właścicieli oraz prototypy robotów
+console.log(
+  `Owner: ${bobsRobot.owner} Is 'robot' proto: ${bobsRobot.__proto__ === robot}`
+);
+console.log(
+  `Owner: ${bobsRobot.owner}, Is 'robot' proto: ${
+    bobsRobot.__proto__ === robot
+  }`
+);

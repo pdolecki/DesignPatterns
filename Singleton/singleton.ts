@@ -1,4 +1,4 @@
-// Chcemy żeby nasza aplikacja udostępniała globalnie jedną instancję(tę samą) słownika.
+// Chcemy żeby nasza aplikacja udostępniała jedną instancję słownika
 // Tworzymy klasę słownik, która będzie tym singletonem
 class DictionarySingleton {
   private static instance: DictionarySingleton;
@@ -6,6 +6,7 @@ class DictionarySingleton {
   private constructor() {}
 
   // Następnie umożłiwiamy dostęp do tej instancji
+  // (bez możliwości jego edycji)
   public static getInstance(): DictionarySingleton {
     if (!DictionarySingleton.instance) {
       DictionarySingleton.instance = new DictionarySingleton();
@@ -14,4 +15,4 @@ class DictionarySingleton {
   }
 }
 // Korzystamy z naszej instancji "globalnie"
-const singleton = DictionarySingleton.getInstance();
+const dictionary = DictionarySingleton.getInstance();
